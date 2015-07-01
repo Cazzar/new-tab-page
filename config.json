@@ -2,22 +2,25 @@
     "bool": {
         "borders":              true,
         "alwaysopen":           false,
-        "mascot":               false
+        "mascot":               false,
+        "uppercase":            true
     },
     
     "style": {
         "heading_font":         "tewi",
         "link_font":            "tewi",
-        "heading_font_size":    "10px",
-        "link_font_size":       "10px",
-        "background":           "#19191b",
+        "heading_font_size":    "16px",
+        "link_font_size":       "16px",
+        "background":           "#000",
         "foreground":           "#121212",
-        "heading_color":        "#8d2036",
+        "heading_color":        "#3D8B98",
         "link_color":           "#999999",
-        "border_color":         "#8d2036",
+        "border_color":         "#45B183",
         "border_width":         "2px",
         "search_color":         "#cacaca",
-        "search_bg_color":      "#2a2a2a"
+        "search_bg_color":      "#2a2a2a",
+        "search_font":          "tewi"
+        
     },
     
     "ext": {
@@ -27,5 +30,16 @@
         "height":               "500px",
         "width":                "400px",
         "opacity":              ".2"
+    },
+    
+    "scratch": {
+        "title":                "New Tab",
+        "command_prefix":       ">>"
+    },
+    
+    "scrBlocks": {
+        "useLinkJs":            true
     }
+    
+    
 }
