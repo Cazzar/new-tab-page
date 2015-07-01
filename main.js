@@ -412,7 +412,9 @@ String.prototype.replaceChars = function (character, replacement) {
 };
 
 // cleanup
-window.onunload = function () {
+window.onunload = function() {
     delete window.cfg;
     delete window.cfg_bool;
+    delete window.scratch;
+    delete window.blocks;
 };
