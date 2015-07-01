@@ -149,6 +149,7 @@ More character replacements can be used with more arrays
 
 * Cleanup Code
 * Optimise
+* Consider using objects instead of arrays for config so that they can be more easily implemented
 
 Master: https://github.com/yukisuki/startpage
 Fork: https://github.com/Scrxtchy/startpage
