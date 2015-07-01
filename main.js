@@ -23,36 +23,6 @@ var numBlocks;
 var searchBlock;
 
 function styleJq() {
-    $.getJSON("config.json", function (data) {
-        window.cfg = [
-            data.style.heading_font,
-            data.style.link_font,
-            data.style.heading_font_size,
-            data.style.link_font_size,
-            data.style.background,
-            data.style.foreground,
-            data.style.heading_color,
-            data.style.link_color,
-            data.style.border_color,
-            data.style.border_width,
-            data.style.search_color,
-            data.style.search_bg_color,
-            data.ext.ref,
-            data.ext.bottom,
-            data.ext.right,
-            data.ext.height,
-            data.ext.width,
-            data.ext.opacity,
-            data.style.search_font
-        ];
-        window.cfg_bool = [
-            data.bool.borders,
-            data.bool.alwaysopen,
-            data.bool.mascot,
-            data.bool.uppercase
-        ];
-
-
         $("span").css("fontFamily", cfg[0]); //COMMENT THESE BETTER
         $("a").css("fontFamily", cfg[1]);
         $("#popup").css("fontFamily", cfg[1]);
@@ -87,7 +57,6 @@ function styleJq() {
         if (cfg_bool[3]) {
             $(".sqr").css("text-transform", "uppercase"); //Sets all text in squares to Uppercase
         }
-    });
 }
 
 
