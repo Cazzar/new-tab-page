@@ -1,6 +1,7 @@
 var searchArr = [];
 var commandArr= [];
 var helpArr =	[];
+var bookArr =	[];
 
 searchArr.push({
 	name:			"google",
@@ -130,6 +131,21 @@ commandArr.push({
 	bmPrefix:		"",
 	bookmark:		[[]]
 });
+
+*/
+
+bookArr.push({
+	command:		"4ch",
+	url:			"https://4chan.org/"
+})
+
+/*Template
+
+
+bookArr.push({
+	command:		"",
+	url:			""
+})
 
 */
 

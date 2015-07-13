@@ -149,6 +149,19 @@ More character replacements can be used with more arrays or for bookmark entries
 [["_"," "],["%20"," "]]
 ```
 
+###### adding bookmark
+
+Bookmarks are preset queries that can be used to go to a direct url from a simple term. These are checked for last, and are not triggered if a search/command has been triggered
+
+```
+bookArr.push({
+	command:		"github",
+	url:			"https://github.com/"
+})
+```
+
+
+
 #### TODO
 
 * Cleanup Code

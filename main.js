@@ -277,7 +277,16 @@ commandArr.forEach(function (action) { //Scan each array element
         }, this);
     }
 
-    if (fallback) { //If our search was unsuccessful
+    if (fallback) { //If we search was unsucessfull, check bookmarks
+    bookArr.forEach(function(action) {
+               if (action.command == query) {
+                   window.location = action.url;
+                   fallback = false;
+               }
+        }, this);
+    }
+    
+    if (fallback) { //If our search was still unsuccessful
         searchArr[0].replaceChars.forEach(function (char) { //Our default is the first in the file
             query = query.replaceChars(char[0], char[1]); //Replace it's characters for a likable query
         }, this);
