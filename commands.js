@@ -126,7 +126,9 @@ commandArr.push({
 	name:			"",
 	command:		"",
 	url: 			"",
-	replaceChars: 	[[" ", "_"]]
+	replaceChars: 	[[" ", "_"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 */
