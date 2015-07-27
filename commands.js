@@ -10,23 +10,9 @@ searchArr.push({
 });
 
 searchArr.push({
-	name:			"bing",
-	command:		"-b",
-	url:			"https://www.bing.com/?q=",
-	replaceChars: 	[[" ", "+"]]
-});
-
-searchArr.push({
 	name:			"youtube",
 	command:		"-y",
 	url: 			"https://www.youtube.com/results?search_query=",
-	replaceChars: 	[[" ", "+"]]
-});
-
-searchArr.push({
-	name:			"duckduckgo",
-	command:		"-d",
-	url: 			"https://duckduckgo.com/?q=",
 	replaceChars: 	[[" ", "+"]]
 });
 

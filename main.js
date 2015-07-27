@@ -1,3 +1,4 @@
+/// <reference path="typings/jquery/jquery.d.ts"/>
 //Set Public Variables --Scratch
 var helpString = ""; //String of text that is used on help popup
 
@@ -129,8 +130,10 @@ $.getJSON("config.json", function (data) {
             break;
     }
     if (usBg) {//If we are using a background video, change page for these changes
-        document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
-        $("#bgvid").css("opacity", scratch[2]); //Set it's opacity
+        $(function() {
+            document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
+            $("#bgvid").css("opacity", scratch[2]); //Set it's opacity
+         })
     }
     
     //Set Tab Title

@@ -30,41 +30,54 @@ blockArr.push({
 });
 
 blockArr.push({
+	title:			"misc",
+	type:			"link",
+	num:			"4"
+});
+
+blockArr.push({
 	title:			"search",
 	type:			"search",
-	num:			"4"
+	num:			"5"
 });
 
 //Block 1
 linksArr.push({
-	name:			"/a/",
-	href:			"http://boards.4chan.org/a/",
+	name:			"facebook",
+	href:			"https://facebook.com/",
 	block:			1
 });
 
 linksArr.push({
-	name:			"/jp/",
-	href:			"http://boards.4chan.org/jp/",
+	name:			"twitter",
+	href:			"http://tweetdeck.twitter.com/",
 	block:			1
 });
 
 linksArr.push({
-	name:			"/w/",
-	href:			"http://boards.4chan.org/w/",
+	name:			"ozfur",
+	href:			"http://ozzyfurocity.net/",
 	block:			1
 });
 
 linksArr.push({
-	name:			"/g/",
-	href:			"http://boards.4chan.org/g/",
+	name:			"github",
+	href:			"https://github.com/cazzar",
 	block:			1
 });
 
 linksArr.push({
-	name:			"/vg/",
-	href:			"http://boards.4chan.org/vg/",
+	name:			"youtube",
+	href:			"https://youtube.com/",
 	block:			1
 });
+
+linksArr.push({
+	name:			"ipt",
+	href:			"http://iptorrents.me",
+	block:			1
+});
+
 
 //Block 2
 
@@ -142,6 +155,37 @@ linksArr.push({
 	href:			"http://bakabt.me/",
 	block:			3
 });
+
+linksArr.push({
+	name:			"kazamatsuri",
+	href:			"http://kazamatsuri.org/",
+	block:			3
+})
+
+linksArr.push({
+	name:			"mikudb",
+	href:			"http://mikudb.moe",
+	block:			4
+});
+
+linksArr.push({
+	name:			"vocadb",
+	href:			"https://vocadb.net/",
+	block:			4
+});
+
+linksArr.push({
+	name:			"gmail",
+	href:			"https://inbox.google.com",
+	block:			4
+});
+
+linksArr.push({
+	name:			"fedemail",
+	href:			"http://federation.edu.au/office365",
+	block:			4
+});
+
 
 /* Template
 

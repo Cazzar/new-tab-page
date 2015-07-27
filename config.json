@@ -33,7 +33,7 @@
     },
     
     "scratch": {
-        "background":           "videoBackground.mp4",
+        "background":           "CMO.mp4",
         "background_type":      "mp4",
         "opacity":              "0.3",
         "title":                "New Tab",
