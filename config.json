@@ -37,7 +37,8 @@
         "background_type":      "mp4",
         "opacity":              "0.3",
         "title":                "New Tab",
-        "command_prefix":       ">>"
+        "command_prefix":       ">>",
+        "verbose_level":        "0"
     },
     
     "scrBlocks": {

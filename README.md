@@ -167,6 +167,7 @@ bookArr.push({
 * Cleanup Code
 * Optimise
 * Consider using objects instead of arrays for config so that they can be more easily implemented
+* Finish or scrap verbosity (Might remove it in favour of web debugger)
 
 Master: https://github.com/yukisuki/startpage
 Fork: https://github.com/Scrxtchy/startpage
