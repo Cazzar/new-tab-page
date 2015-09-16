@@ -1,4 +1,3 @@
-/// <reference path="typings/jquery/jquery.d.ts"/>
 //Set Public Variables --Scratch
 //clean it up shitface
 
@@ -46,7 +45,7 @@ function styleJq() {
     $(".sqr").css("borderTop", "0 solid " + cfg.border_colour);
     $(".sqr").css("borderBottom", "0 solid " + cfg.border_colour);
     $("#popup").css("borderTop", cfg.border_width + " solid " + cfg.border_colour);
-    if (!!document.getElementById("searchinput")) {
+    if (!!$(".searchinput")) {
         $("#searchinput").css("color", cfg.search_colour);
         $("#searchinput").css("backgroundColor", cfg.search_bg_colour);
         $("#searchinput").css("font-family", cfg.search_font);
@@ -95,14 +94,14 @@ $.getJSON("config.json", function (data) {
         width: data.ext.width,
         opacity: data.ext.opacity,
         search_font: data.style.search_font
-    }
+    };
 
     cfg_bool = {
         borders: data.bool.borders,
         alwaysopen: data.bool.alwaysopen,
         mascot: data.bool.mascot,
         uppercase: data.bool.uppercase
-    }
+    };
 
     scratch = {
         background: data.scratch.background,
@@ -111,11 +110,11 @@ $.getJSON("config.json", function (data) {
         title: data.scratch.title,
         command_prefix: data.scratch.command_prefix,
         verbose_level: data.scratch.verbose_level
-    }
+    };
 
     blocks = {
         useLinkJs: data.scrBlocks.useLinkJs
-    }
+    };
     
     
     //Scratch
@@ -137,7 +136,6 @@ $.getJSON("config.json", function (data) {
         case "clr":
             $("body").css("backgroundColor", scratch.background);
         case "img":
-        default:
             $("body").css("backgroundImage", scratch.background);
             break;
     }
@@ -165,7 +163,7 @@ function writeLog(log, level) {
 
 function setupBlocks() {
     var cellString = "";
-    writeLog("Setting Up Blocks", 1)
+    writeLog("Setting Up Blocks", 1);
 
     blockArr.forEach(function (blockArr) {
         if (blockArr.type == "link") {
@@ -191,10 +189,10 @@ function setupBlocks() {
 }
 
 function fixJitter() {
-    var container = document.getElementById("container");
+    var container = $(".container");
     writeLog("Fixing Jitter", 1);
     container.style.height = window.innerHeight - 0.5 + "px";
-};
+}
 
 
 function popup(obj, msg, visibility) {
@@ -205,7 +203,7 @@ function popup(obj, msg, visibility) {
     } else {
         obj.style.bottom = -300 + "px";
     }
-};
+}
 
 function helpCommandCheck(input) {
     writeLog("Checking Help Command", 2);
@@ -218,7 +216,7 @@ function helpCommandCheck(input) {
     }, this);
 
     return myVar;
-};
+}
 
 
 //Do the Search
@@ -228,16 +226,16 @@ function search(query) {
     var fallback = true;
     var bookmark;
 
-    if (helpCommandCheck(query) != null) {
+    if (helpCommandCheck(query) !== null) {
         switch (helpInput) {
             case "search":
-                popup(popupDiv, helpString, HelpVisibility);
-                HelpVisibility = !HelpVisibility;
+                popup(window.popupDiv, helpString, window.HelpVisibility);
+                window.HelpVisibility = !window.HelpVisibility;
                 fallback = false;
                 break;
             case "command":
-                popup(popupDiv, commandString, HelpVisibility);
-                HelpVisibility = !HelpVisibility;
+                popup(window.popupDiv, commandString, window.HelpVisibility);
+                window.HelpVisibility = !window.HelpVisibility;
                 fallback = false;
                 break;
 
@@ -259,7 +257,7 @@ function search(query) {
                     }
                 }, this);
                 fallback = false; //Store data to say that we have a match
-                if (bookmark != undefined) {
+                if (bookmark !== undefined) {
                     window.location = bookmark;
                 } else {
                     action.replaceChars.forEach(function (char) { //For Each Element in our Replace Character
@@ -283,8 +281,8 @@ function search(query) {
                     }
                 }, this);
                 fallback = false; //Store data to say that we have a match
-                console.log(bookmark && null)
-                if (bookmark != undefined) { //If we have a bookmark stored
+                console.log(bookmark && null);
+                if (bookmark !== undefined) { //If we have a bookmark stored
                     window.location = bookmark; //Go To Book mark
                 } else { //Else
                     action.replaceChars.forEach(function (char) { //scan over it's query replacements
@@ -312,7 +310,7 @@ function search(query) {
         }, this);
         window.location = searchArr[0].url + query; //Go to search page
     }
-};
+}
 
 
 window.onresize = function () {
@@ -321,21 +319,21 @@ window.onresize = function () {
 
 $(document).ready(function () {
     writeLog("Execute Onload", 1);
-    if (useJsBlocks == true) {
+    if (useJsBlocks === true) {
         writeLog("Using JS Setup", 1);
         setupBlocks();
     }
     styleJq();
     fixJitter();
-    HelpVisibility = false;
-    popupDiv = document.getElementById("popup");
+    window.HelpVisibility = false;
+    window.popupDiv = $(".popup");
     
     
     // search
-    searchinput = document.getElementById("searchinput");
+    var searchinput = $(".searchinput");
 
 
-    if (!!searchinput) {
+    if (searchinput.length) {
         searchinput.addEventListener("keypress", function (a) {
             var key = a.keyCode;
             if (key == 13) {
@@ -350,11 +348,11 @@ $(document).ready(function () {
     document.addEventListener("keypress", function (a) {
         var key = a.keyCode;
         if (key == 9) {
-            var search_sqr = document.getElementById("search_sqr")
+            var search_sqr = $(".search_sqr");
             search_sqr.style.height = 300 + 37 + "px";
             search_sqr.style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
             search_sqr.style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
-            document.getElementById("searchinput").focus();
+            $(".searchinput").focus();
         }
 
         if ([9].indexOf(key) > -1) {
@@ -363,9 +361,9 @@ $(document).ready(function () {
     });
 
     // close popup when clicked
-    popupDiv.addEventListener("click", function () {
-        popup(this, "", HelpVisibility);
-        HelpVisibility = !HelpVisibility;
+    window.popupDiv.addEventListener("click", function () {
+        popup(this, "", window.HelpVisibility);
+        window.HelpVisibility = !window.HelpVisibility;
     });
 
     // adding event listeners to squares or expanding them onload
@@ -376,17 +374,17 @@ $(document).ready(function () {
             sqr[i].addEventListener("mouseout", contract, false);
         }
     } else {
-        for (var i = 0; i < sqr.length; ++i) {
+        for (var j = 0; j < sqr.length; ++j) {
             var a = 0;
             for (var x = 0; x < sqr.length; ++x) {
                 if (a < sqr[x].getElementsByTagName("a").length) {
                     a = sqr[x].getElementsByTagName("a").length;
                 }
             }
-            sqr[i].style.height = 225 + 25 * a + "px";
+            sqr[j].style.height = 225 + 25 * a + "px";
             if (cfg_bool.borders) {
-                sqr[i].style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
-                sqr[i].style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
+                sqr[j].style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+                sqr[j].style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
             }
         }
     }

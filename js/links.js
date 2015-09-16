@@ -160,7 +160,7 @@ linksArr.push({
 	name:			"kazamatsuri",
 	href:			"http://kazamatsuri.org/",
 	block:			3
-})
+});
 
 linksArr.push({
 	name:			"mikudb",
