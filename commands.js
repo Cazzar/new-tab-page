@@ -57,16 +57,6 @@ searchArr.push({
 	bookmark:		[[]]
 });
 
-
-searchArr.push({
-	name:			"direct url",
-	command:		"go",
-	url: 			"",
-	replaceChars: 	[[]],
-	bmPrefix:		"",
-	bookmark:		[[]]
-});
-
 /*Template
 
 searchArr.push({
@@ -101,6 +91,15 @@ commandArr.push({
 	command:		"ri",
 	url: 			"https://www.google.com/searchbyimage?image_url=",
 	replaceChars: 	[[]] //unknown
+});
+
+commandArr.push({
+	name:			"direct url",
+	command:		"go",
+	url: 			"",
+	replaceChars: 	[[]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 /*Template

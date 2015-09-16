@@ -1,5 +1,7 @@
 /// <reference path="typings/jquery/jquery.d.ts"/>
 //Set Public Variables --Scratch
+//clean it up shitface
+
 var helpString = ""; //String of text that is used on help popup
 
 var commandString = ""; //String of text to display on command help popup
@@ -23,136 +25,147 @@ var useJsBlocks;
 var numBlocks;
 var searchBlock;
 
+var cfg;
+var cfg_bool;
+var scratch;
+var blocks;
+
 function styleJq() {
-        $("span").css("fontFamily", cfg[0]); //COMMENT THESE BETTER
-        $("a").css("fontFamily", cfg[1]);
-        $("#popup").css("fontFamily", cfg[1]);
-        $("span").css("fontSize", cfg[2]);
-        $("a").css("fontSize", cfg[3]);
-        $("#popup").css("fontSize", cfg[3]);
-        //$("body").css("backgroundColor", cfg[4]);
-        $(".sqr").css("backgroundColor", cfg[5]);
-        $("#popup").css("backgroundColor", cfg[5]);
-        $("span").css("color", cfg[6]);
-        $("a").css("color", cfg[7]);
-        $("#popup").css("color", cfg[7]);
-        $(".sqr").css("borderTop", "0 solid " + cfg[8]);
-        $(".sqr").css("borderBottom", "0 solid " + cfg[8]);
-        $("#popup").css("borderTop", cfg[9] + " solid " + cfg[8]);
-        if (!!document.getElementById("searchinput")) {
-            $("#searchinput").css("color", cfg[10]);
-            $("#searchinput").css("backgroundColor", cfg[11]);
-            $("#searchinput").css("font-family", cfg[18]);
-            $("#searchinput").css("font-size", cfg[3]);
-        }
-        if (cfg_bool[2]) { //If Mascot is used
-            $("#bgimg").css("backgroundImage", "url('" + cfg[12] + "')"); //Mascot Path
-            $("#bgimg").css("bottom", cfg[13]); //Box Model
-            $("#bgimg").css("right", cfg[14]);
-            $("#bgimg").css("height", cfg[15]);
-            $("#bgimg").css("width", cfg[16]);
-            $("#bgimg").css("opacity", cfg[17]); //Transparency
-        } else {
-            $("#bgimg").css("backgroundImage", ""); //If mascot is false - should be destroy but oh well
-        }
-        if (cfg_bool[3]) {
-            $(".sqr").css("text-transform", "uppercase"); //Sets all text in squares to Uppercase
-        }
+    $("span").css("fontFamily", cfg.heading_font); //COMMENT THESE BETTER
+    $("a").css("fontFamily", cfg.link_font);
+    $("#popup").css("fontFamily", cfg.link_font);
+    $("span").css("fontSize", cfg.heading_font_size);
+    $("a").css("fontSize", cfg.link_font_size);
+    $("#popup").css("fontSize", cfg.link_font_size);
+    //$("body").css("backgroundColor", cfgO.background);
+    $(".sqr").css("backgroundColor", cfg.foreground);
+    $("#popup").css("backgroundColor", cfg.foreground);
+    $("span").css("color", cfg.heading_colour);
+    $("a").css("color", cfg.link_colour);
+    $("#popup").css("color", cfg.link_colour);
+    $(".sqr").css("borderTop", "0 solid " + cfg.border_colour);
+    $(".sqr").css("borderBottom", "0 solid " + cfg.border_colour);
+    $("#popup").css("borderTop", cfg.border_width + " solid " + cfg.border_colour);
+    if (!!document.getElementById("searchinput")) {
+        $("#searchinput").css("color", cfg.search_colour);
+        $("#searchinput").css("backgroundColor", cfg.search_bg_colour);
+        $("#searchinput").css("font-family", cfg.search_font);
+        $("#searchinput").css("font-size", cfg.link_font_size);
+    }
+    if (cfg_bool.mascot) { //If Mascot is used
+        $("#bgimg").css("backgroundImage", "url('" + cfg.ref + "')"); //Mascot Path
+        $("#bgimg").css("bottom", cfg.bottom); //Box Model
+        $("#bgimg").css("right", cfg.right);
+        $("#bgimg").css("height", cfg.height);
+        $("#bgimg").css("width", cfg.width);
+        $("#bgimg").css("opacity", cfg.opacity); //Transparency
+    } else {
+        $("#bgimg").css("backgroundImage", ""); //If mascot is false - should be destroy but oh well
+    }
+    if (cfg_bool.uppercase) {
+        $(".sqr").css("text-transform", "uppercase"); //Sets all text in squares to Uppercase
+    }
 }
 
 
 
 //Load Settings from JSON
 $.getJSON("config.json", function (data) {
-    window.cfg = [
-        data.style.heading_font,
-        data.style.link_font,
-        data.style.heading_font_size,
-        data.style.link_font_size,
-        data.style.background,
-        data.style.foreground,
-        data.style.heading_color,
-        data.style.link_color,
-        data.style.border_color,
-        data.style.border_width,
-        data.style.search_color,
-        data.style.search_bg_color,
-        data.ext.ref,
-        data.ext.bottom,
-        data.ext.right,
-        data.ext.height,
-        data.ext.width,
-        data.ext.opacity,
-        data.style.search_font
-    ];
-    window.cfg_bool = [
-        data.bool.borders,
-        data.bool.alwaysopen,
-        data.bool.mascot,
-        data.bool.uppercase
-    ];
 
-    window.scratch = [ //You will need to shift these around later
-        data.scratch.background,
-        data.scratch.background_type,
-        data.scratch.opacity,
-        data.scratch.title,
-        data.scratch.command_prefix
-    ];
+//Find regex for tab
+//srs
 
-    window.blocks = [
-        data.scrBlocks.useLinkJs,
-        data.scrBlocks.numBlocks,
-        data.scrBlocks.SearchBlock
-    ];
+    cfg = {
+        heading_font:       data.style.heading_font,
+        link_font:          data.style.link_font,
+        heading_font_size:  data.style.heading_font_size,
+        link_font_size:     data.style.link_font_size,
+        background:        data.style.background,
+        foreground: data.style.foreground,
+        heading_colour: data.style.heading_color,
+        link_colour: data.style.link_color,
+        border_colour: data.style.border_color,
+        border_width: data.style.border_width,
+        search_colour: data.style.search_color,
+        search_bg_colour: data.style.search_bg_color,
+        ref: data.ext.ref,
+        bottom: data.ext.bottom,
+        right: data.ext.right,
+        height: data.ext.height,
+        width: data.ext.width,
+        opacity: data.ext.opacity,
+        search_font: data.style.search_font
+    }
+
+    cfg_bool = {
+        borders: data.bool.borders,
+        alwaysopen: data.bool.alwaysopen,
+        mascot: data.bool.mascot,
+        uppercase: data.bool.uppercase
+    }
+
+    scratch = {
+        background: data.scratch.background,
+        background_type: data.scratch.background_type,
+        opacity: data.scratch.opacity,
+        title: data.scratch.title,
+        command_prefix: data.scratch.command_prefix,
+        verbose_level: data.scratch.verbose_level
+    }
+
+    blocks = {
+        useLinkJs: data.scrBlocks.useLinkJs
+    }
+    
     
     //Scratch
     var tempBackgroundString;
     var usBg = false;
-    switch (scratch[1]) {
+    switch (scratch.background_type) {
         case "mp4":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch[0] + '" type="video/mp4"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/mp4"></video>';
             usBg = true;
             break;
         case "webm":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch[0] + '" type="video/webm"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/webm"></video>';
             usBg = true;
             break;
         case "ogg":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch[0] + '" type="video/ogg"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/ogg"></video>';
             usBg = true;
             break;
         case "clr":
-            $("body").css("backgroundColor", scratch[0]);
+            $("body").css("backgroundColor", scratch.background);
         case "img":
         default:
-            $("body").css("backgroundImage", scratch[0]);
+            $("body").css("backgroundImage", scratch.background);
             break;
     }
     if (usBg) {//If we are using a background video, change page for these changes
-        $(function() {
-            document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
-            $("#bgvid").css("opacity", scratch[2]); //Set it's opacity
-         })
+        document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
+        $("#bgvid").css("opacity", scratch.opacity); //Set it's opacity
     }
     
     //Set Tab Title
-    document.title = scratch[3]; //Set tab title
+    document.title = scratch.title; //Set tab title
     
     //set command prefix variable
-    commandPrefix = scratch[4]; //Prefix to use to destinct commands
+    commandPrefix = scratch.command_prefix; //Prefix to use to destinct commands
     commandArr.forEach(setCommandString); //Now with the command prefix, make the string
 
-    useJsBlocks = blocks[0];
-    numBlocks = blocks[1];
-    searchBlock = blocks[2];
+    useJsBlocks = blocks.useLinkJs;
 
 
 
 });
 
+function writeLog(log, level) {
+    if (level <= scratch.verbose_level) console.log(log);
+}
+
 function setupBlocks() {
     var cellString = "";
+    writeLog("Setting Up Blocks", 1)
 
     blockArr.forEach(function (blockArr) {
         if (blockArr.type == "link") {
@@ -179,20 +192,23 @@ function setupBlocks() {
 
 function fixJitter() {
     var container = document.getElementById("container");
+    writeLog("Fixing Jitter", 1);
     container.style.height = window.innerHeight - 0.5 + "px";
 };
 
 
 function popup(obj, msg, visibility) {
+    writeLog("Toggle Visibility", 2);
     if (!visibility) {
         obj.innerHTML = msg;
-        obj.style.bottom = "-" + cfg[9];
+        obj.style.bottom = "-" + cfg.border_width;
     } else {
         obj.style.bottom = -300 + "px";
     }
 };
 
 function helpCommandCheck(input) {
+    writeLog("Checking Help Command", 2);
     var myVar;
     helpArr.forEach(function (entry) {
         if (input == entry.command) {
@@ -207,6 +223,7 @@ function helpCommandCheck(input) {
 
 //Do the Search
 function search(query) {
+    writeLog("Executing Query", 1);
     var command = query.substr(0, 2); //Store our first command
     var fallback = true;
     var bookmark;
@@ -234,10 +251,10 @@ function search(query) {
             input: query.substr(5) //Store input data
         };
 
-commandArr.forEach(function (action) { //Scan each array element 
+        commandArr.forEach(function (action) { //Scan each array element 
             if (commandObj.prefix == action.command) { //If our command is found
-                action.bookmark.forEach(function(bookMark) {
-                    if(bookMark[0] == commandObj.input) {
+                action.bookmark.forEach(function (bookMark) {
+                    if (bookMark[0] == commandObj.input) {
                         bookmark = action.bmPrefix + bookMark[1];
                     }
                 }, this);
@@ -245,10 +262,10 @@ commandArr.forEach(function (action) { //Scan each array element
                 if (bookmark != undefined) {
                     window.location = bookmark;
                 } else {
-                action.replaceChars.forEach(function (char) { //For Each Element in our Replace Character
-                    commandObj.input = commandObj.input.replaceChars(char[0], char[1]); //Replace them
-                }, this);
-                window.location = action.url + commandObj.input; //Go To search page
+                    action.replaceChars.forEach(function (char) { //For Each Element in our Replace Character
+                        commandObj.input = commandObj.input.replaceChars(char[0], char[1]); //Replace them
+                    }, this);
+                    window.location = action.url + commandObj.input; //Go To search page
                 }
             }
         }, this);
@@ -281,14 +298,14 @@ commandArr.forEach(function (action) { //Scan each array element
     }
 
     if (fallback) { //If we search was unsucessfull, check bookmarks
-    bookArr.forEach(function(action) {
-               if (action.command == query) {
-                   window.location = action.url;
-                   fallback = false;
-               }
+        bookArr.forEach(function (action) {
+            if (action.command == query) {
+                window.location = action.url;
+                fallback = false;
+            }
         }, this);
     }
-    
+
     if (fallback) { //If our search was still unsuccessful
         searchArr[0].replaceChars.forEach(function (char) { //Our default is the first in the file
             query = query.replaceChars(char[0], char[1]); //Replace it's characters for a likable query
@@ -302,10 +319,10 @@ window.onresize = function () {
     fixJitter();
 };
 
-window.onload = function () {
-    console.log(useJsBlocks);
+$(document).ready(function () {
+    writeLog("Execute Onload", 1);
     if (useJsBlocks == true) {
-        console.log("Using js setup");
+        writeLog("Using JS Setup", 1);
         setupBlocks();
     }
     styleJq();
@@ -335,8 +352,8 @@ window.onload = function () {
         if (key == 9) {
             var search_sqr = document.getElementById("search_sqr")
             search_sqr.style.height = 300 + 37 + "px";
-            search_sqr.style.borderTop = cfg[9] + " solid " + cfg[8];
-            search_sqr.style.borderBottom = cfg[9] + " solid " + cfg[8];
+            search_sqr.style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+            search_sqr.style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
             document.getElementById("searchinput").focus();
         }
 
@@ -353,7 +370,7 @@ window.onload = function () {
 
     // adding event listeners to squares or expanding them onload
     var sqr = document.querySelectorAll(".sqr");
-    if (!cfg_bool[1]) {
+    if (!cfg_bool.alwaysopen) {
         for (var i = 0; i < sqr.length; ++i) {
             sqr[i].addEventListener("mouseover", expand, false);
             sqr[i].addEventListener("mouseout", contract, false);
@@ -367,16 +384,17 @@ window.onload = function () {
                 }
             }
             sqr[i].style.height = 225 + 25 * a + "px";
-            if (cfg_bool[0]) {
-                sqr[i].style.borderTop = cfg[9] + " solid " + cfg[8];
-                sqr[i].style.borderBottom = cfg[9] + " solid " + cfg[8];
+            if (cfg_bool.borders) {
+                sqr[i].style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+                sqr[i].style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
             }
         }
     }
-}
+});
 
 // expanding and contracting squares
 function expand() {
+    writeLog("Expand Action", 2);
     var acount = this.getElementsByTagName("a").length;
     var icount = this.getElementsByTagName("input").length;
     if (icount >= 1) {
@@ -384,15 +402,16 @@ function expand() {
     } else {
         this.style.height = 300 + 25 * acount + "px";
     }
-    if (cfg_bool[0]) {
-        this.style.borderTop = cfg[9] + " solid " + cfg[8];
-        this.style.borderBottom = cfg[9] + " solid " + cfg[8];
+    if (cfg_bool.borders) {
+        this.style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+        this.style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
     }
 }
 function contract() {
+    writeLog("Contract Action", 2);
     this.style.height = "150px";
-    this.style.borderTop = "0 solid" + cfg[8];
-    this.style.borderBottom = "0 solid" + cfg[8];
+    this.style.borderTop = "0 solid" + cfg.border_colour;
+    this.style.borderBottom = "0 solid" + cfg.border_colour;
 }
 
 // string replacement
