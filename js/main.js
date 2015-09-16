@@ -122,15 +122,15 @@ $.getJSON("config.json", function (data) {
     var usBg = false;
     switch (scratch.background_type) {
         case "mp4":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/mp4"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/mp4"></video>';
             usBg = true;
             break;
         case "webm":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/webm"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/webm"></video>';
             usBg = true;
             break;
         case "ogg":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="' + scratch.background + '" type="video/ogg"></video>';
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/ogg"></video>';
             usBg = true;
             break;
         case "clr":
