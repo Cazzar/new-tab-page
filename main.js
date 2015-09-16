@@ -209,7 +209,7 @@ function helpCommandCheck(input) {
 function search(query) {
     var command = query.substr(0, 2); //Store our first command
     var fallback = true;
-
+    var bookmark;
 
     if (helpCommandCheck(query) != null) {
         switch (helpInput) {
@@ -234,14 +234,22 @@ function search(query) {
             input: query.substr(5) //Store input data
         };
 
-        commandArr.forEach(function (action) { //Scan each array element 
+commandArr.forEach(function (action) { //Scan each array element 
             if (commandObj.prefix == action.command) { //If our command is found
-                
+                action.bookmark.forEach(function(bookMark) {
+                    if(bookMark[0] == commandObj.input) {
+                        bookmark = action.bmPrefix + bookMark[1];
+                    }
+                }, this);
+                fallback = false; //Store data to say that we have a match
+                if (bookmark != undefined) {
+                    window.location = bookmark;
+                } else {
                 action.replaceChars.forEach(function (char) { //For Each Element in our Replace Character
                     commandObj.input = commandObj.input.replaceChars(char[0], char[1]); //Replace them
                 }, this);
-                fallback = false; //Store data to say that we have a match
                 window.location = action.url + commandObj.input; //Go To search page
+                }
             }
         }, this);
     } else { //It definatly not a subcommand ---- Make an elseif with another subcommand prefix if desired, objects and arrays will need to be created
@@ -252,17 +260,36 @@ function search(query) {
 
         searchArr.forEach(function (action) { //scan array of search elements
             if (searchObj.prefix == action.command) { //If our prefix matches our command
-                action.replaceChars.forEach(function (char) { //scan over it's query replacements
-                    searchObj.input = searchObj.input.replaceChars(char[0], char[1]); //Replace all characters that are needed
+                action.bookmark.forEach(function (bookMark) { //for each stored bookmark
+                    if (bookMark[0] == searchObj.input) { //Check if our input matches
+                        bookmark = action.bmPrefix + bookMark[1]; //if match store in variable
+                    }
                 }, this);
                 fallback = false; //Store data to say that we have a match
-                window.location = action.url + searchObj.input; //Go to search page
+                console.log(bookmark && null)
+                if (bookmark != undefined) { //If we have a bookmark stored
+                    window.location = bookmark; //Go To Book mark
+                } else { //Else
+                    action.replaceChars.forEach(function (char) { //scan over it's query replacements
+                        searchObj.input = searchObj.input.replaceChars(char[0], char[1]); //Replace all characters that are needed
+                    }, this);
+                    window.location = action.url + searchObj.input; //Go to search page
+                }
             }
 
         }, this);
     }
 
-    if (fallback) { //If our search was unsuccessful
+    if (fallback) { //If we search was unsucessfull, check bookmarks
+    bookArr.forEach(function(action) {
+               if (action.command == query) {
+                   window.location = action.url;
+                   fallback = false;
+               }
+        }, this);
+    }
+    
+    if (fallback) { //If our search was still unsuccessful
         searchArr[0].replaceChars.forEach(function (char) { //Our default is the first in the file
             query = query.replaceChars(char[0], char[1]); //Replace it's characters for a likable query
         }, this);

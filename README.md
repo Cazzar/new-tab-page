@@ -127,7 +127,9 @@ searchArr.push({
 	name:			"google", //Name of search
 	command:		"-g", //comand
 	url: 			"https://www.google.com/#q=", //url to query page
-	replaceChars: 	[[" ", "_"]] //Charcters to replace in url
+	replaceChars: 	[[" ", "_"]], //Charcters to replace in url
+	bmPrefix:		"https://www.google.com/#q=" //Prefix used on bookmarks, makes sence on diverse networks
+	bookmark:		[["hideki kamiya", "神谷英樹"]] //Multi-Dimensional array of bookmarks
 });
 ```
 
@@ -136,14 +138,29 @@ commandArr.push({
 	name:			"scan qr", //Name of command
 	command:		"qr", //comand
 	url: 			"http://zxing.org/w/decode?u=", //url to destination
-	replaceChars: 	[[]] //Characters to replace
+	replaceChars: 	[[]], //Charcters to replace
+	bmPrefix:		"" //Prefix used on bookmark
+	bookmark:		[[]] Multi-Dimensional array of bookmarks
 });
 ```
 
-More character replacements can be used with more arrays
+More character replacements can be used with more arrays or for bookmark entries
 ```
 [["_"," "],["%20"," "]]
 ```
+
+###### adding bookmark
+
+Bookmarks are preset queries that can be used to go to a direct url from a simple term. These are checked for last, and are not triggered if a search/command has been triggered
+
+```
+bookArr.push({
+	command:		"github",
+	url:			"https://github.com/"
+})
+```
+
+
 
 #### TODO
 

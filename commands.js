@@ -1,47 +1,60 @@
 var searchArr = [];
 var commandArr= [];
 var helpArr =	[];
+var bookArr =	[];
 
 searchArr.push({
 	name:			"google",
 	command:		"-g",
 	url:			"https://www.google.com/#q=",
-	replaceChars: 	[[" ", "+"]]
+	replaceChars: 	[[" ", "+"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 searchArr.push({
 	name:			"youtube",
 	command:		"-y",
 	url: 			"https://www.youtube.com/results?search_query=",
-	replaceChars: 	[[" ", "+"]]
+	replaceChars: 	[[" ", "+"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 searchArr.push({
 	name:			"niconico",
 	command:		"-n",
 	url: 			"http://www.nicovideo.jp/search/",
-	replaceChars: 	[[" ", "%20"]]
+	replaceChars: 	[[" ", "%20"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 searchArr.push({
 	name:			"pixiv",
 	command:		"-p",
 	url: 			"http://www.pixiv.net/search.php?s_mode=s_tag&word=",
-	replaceChars: 	[[" ", "%20"]]
+	replaceChars: 	[[" ", "%20"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 searchArr.push({
 	name:			"github",
 	command:		"gt",
 	url: 			"https://github.com/search?q=",
-	replaceChars: 	[[" ", "+"]]
+	replaceChars: 	[[" ", "+"]],
+	bmPrefix:		"https://github.com/",
+	bookmark:		[["youtube-dl", "rg3/youtube-dl"], ["fuck", "nvbn/thefuck"]]
 });
 
 searchArr.push({
 	name:			"wikipedia",
 	command:		"-w",
 	url: 			"https://en.wikipedia.org/w/index.php?search=",
-	replaceChars: 	[[]]
+	replaceChars: 	[[]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 
@@ -49,7 +62,9 @@ searchArr.push({
 	name:			"direct url",
 	command:		"go",
 	url: 			"",
-	replaceChars: 	[[]]
+	replaceChars: 	[[]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 /*Template
@@ -58,7 +73,9 @@ searchArr.push({
 	name:			"",
 	command:		"",
 	url: 			"",
-	replaceChars: 	[[" ", "_"]]
+	replaceChars: 	[[" ", "_"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 */
@@ -67,7 +84,9 @@ commandArr.push({
 	name:			"define",
 	command:		"df",
 	url: 			"https://www.google.com/?q=define+",
-	replaceChars: 	[[" ", "+"]]
+	replaceChars: 	[[" ", "+"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
 
 commandArr.push({
@@ -90,8 +109,25 @@ commandArr.push({
 	name:			"",
 	command:		"",
 	url: 			"",
-	replaceChars: 	[[" ", "_"]]
+	replaceChars: 	[[" ", "_"]],
+	bmPrefix:		"",
+	bookmark:		[[]]
 });
+
+*/
+
+bookArr.push({
+	command:		"4ch",
+	url:			"https://4chan.org/"
+})
+
+/*Template
+
+
+bookArr.push({
+	command:		"",
+	url:			""
+})
 
 */
 
