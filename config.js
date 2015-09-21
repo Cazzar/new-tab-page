@@ -1,4 +1,4 @@
-{
+loadData({
     "bool": {
         "borders":              true,
         "alwaysopen":           false,
@@ -44,6 +44,4 @@
     "scrBlocks": {
         "useLinkJs":            true
     }
-    
-    
-}
+});

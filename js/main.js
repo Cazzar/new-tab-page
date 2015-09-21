@@ -69,93 +69,6 @@ function styleJq() {
 
 
 //Load Settings from JSON
-$.getJSON("config.json", function (data) {
-
-//Find regex for tab
-//srs
-
-    cfg = {
-        heading_font:       data.style.heading_font,
-        link_font:          data.style.link_font,
-        heading_font_size:  data.style.heading_font_size,
-        link_font_size:     data.style.link_font_size,
-        background:        data.style.background,
-        foreground: data.style.foreground,
-        heading_colour: data.style.heading_color,
-        link_colour: data.style.link_color,
-        border_colour: data.style.border_color,
-        border_width: data.style.border_width,
-        search_colour: data.style.search_color,
-        search_bg_colour: data.style.search_bg_color,
-        ref: data.ext.ref,
-        bottom: data.ext.bottom,
-        right: data.ext.right,
-        height: data.ext.height,
-        width: data.ext.width,
-        opacity: data.ext.opacity,
-        search_font: data.style.search_font
-    };
-
-    cfg_bool = {
-        borders: data.bool.borders,
-        alwaysopen: data.bool.alwaysopen,
-        mascot: data.bool.mascot,
-        uppercase: data.bool.uppercase
-    };
-
-    scratch = {
-        background: data.scratch.background,
-        background_type: data.scratch.background_type,
-        opacity: data.scratch.opacity,
-        title: data.scratch.title,
-        command_prefix: data.scratch.command_prefix,
-        verbose_level: data.scratch.verbose_level
-    };
-
-    blocks = {
-        useLinkJs: data.scrBlocks.useLinkJs
-    };
-    
-    
-    //Scratch
-    var tempBackgroundString;
-    var usBg = false;
-    switch (scratch.background_type) {
-        case "mp4":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/mp4"></video>';
-            usBg = true;
-            break;
-        case "webm":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/webm"></video>';
-            usBg = true;
-            break;
-        case "ogg":
-            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/ogg"></video>';
-            usBg = true;
-            break;
-        case "clr":
-            $("body").css("backgroundColor", scratch.background);
-        case "img":
-            $("body").css("backgroundImage", scratch.background);
-            break;
-    }
-    if (usBg) {//If we are using a background video, change page for these changes
-        document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
-        $("#bgvid").css("opacity", scratch.opacity); //Set it's opacity
-    }
-    
-    //Set Tab Title
-    document.title = scratch.title; //Set tab title
-    
-    //set command prefix variable
-    commandPrefix = scratch.command_prefix; //Prefix to use to destinct commands
-    commandArr.forEach(setCommandString); //Now with the command prefix, make the string
-
-    useJsBlocks = blocks.useLinkJs;
-
-
-
-});
 
 function writeLog(log, level) {
     if (level <= scratch.verbose_level) console.log(log);
@@ -191,7 +104,7 @@ function setupBlocks() {
 function fixJitter() {
     var container = $(".container");
     writeLog("Fixing Jitter", 1);
-    container.style.height = window.innerHeight - 0.5 + "px";
+    container.css("height", window.innerHeight - 0.5 + "px");
 }
 
 
@@ -317,79 +230,6 @@ window.onresize = function () {
     fixJitter();
 };
 
-$(document).ready(function () {
-    writeLog("Execute Onload", 1);
-    if (useJsBlocks === true) {
-        writeLog("Using JS Setup", 1);
-        setupBlocks();
-    }
-    styleJq();
-    fixJitter();
-    window.HelpVisibility = false;
-    window.popupDiv = $(".popup");
-    
-    
-    // search
-    var searchinput = $(".searchinput");
-
-
-    if (searchinput.length) {
-        searchinput.addEventListener("keypress", function (a) {
-            var key = a.keyCode;
-            if (key == 13) {
-                var query = this.value;
-                search(query);
-            }
-        });
-    }
-
-    
-    // jump to search when tab is pressed
-    document.addEventListener("keypress", function (a) {
-        var key = a.keyCode;
-        if (key == 9) {
-            var search_sqr = $(".search_sqr");
-            search_sqr.style.height = 300 + 37 + "px";
-            search_sqr.style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
-            search_sqr.style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
-            $(".searchinput").focus();
-        }
-
-        if ([9].indexOf(key) > -1) {
-            a.preventDefault();
-        }
-    });
-
-    // close popup when clicked
-    window.popupDiv.addEventListener("click", function () {
-        popup(this, "", window.HelpVisibility);
-        window.HelpVisibility = !window.HelpVisibility;
-    });
-
-    // adding event listeners to squares or expanding them onload
-    var sqr = document.querySelectorAll(".sqr");
-    if (!cfg_bool.alwaysopen) {
-        for (var i = 0; i < sqr.length; ++i) {
-            sqr[i].addEventListener("mouseover", expand, false);
-            sqr[i].addEventListener("mouseout", contract, false);
-        }
-    } else {
-        for (var j = 0; j < sqr.length; ++j) {
-            var a = 0;
-            for (var x = 0; x < sqr.length; ++x) {
-                if (a < sqr[x].getElementsByTagName("a").length) {
-                    a = sqr[x].getElementsByTagName("a").length;
-                }
-            }
-            sqr[j].style.height = 225 + 25 * a + "px";
-            if (cfg_bool.borders) {
-                sqr[j].style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
-                sqr[j].style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
-            }
-        }
-    }
-});
-
 // expanding and contracting squares
 function expand() {
     writeLog("Expand Action", 2);
@@ -434,3 +274,113 @@ window.onunload = function() {
     delete window.scratch;
     delete window.blocks;
 };
+
+$(document).ready(function() {
+    //Scratch
+    var tempBackgroundString;
+    var usBg = false;
+    switch (scratch.background_type) {
+        case "mp4":
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/mp4"></video>';
+            usBg = true;
+            break;
+        case "webm":
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/webm"></video>';
+            usBg = true;
+            break;
+        case "ogg":
+            tempBackgroundString = '<video autoplay loop id="bgvid"><source src="resources/' + scratch.background + '" type="video/ogg"></video>';
+            usBg = true;
+            break;
+        case "clr":
+            $("body").css("backgroundColor", scratch.background);
+        case "img":
+            $("body").css("backgroundImage", scratch.background);
+            break;
+    }
+    if (usBg) {//If we are using a background video, change page for these changes
+        document.body.innerHTML += tempBackgroundString; //Add video string to webpage body
+        $("#bgvid").css("opacity", scratch.opacity); //Set it's opacity
+    }
+    
+    //Set Tab Title
+    document.title = scratch.title; //Set tab title
+    
+    //set command prefix variable
+    commandPrefix = scratch.command_prefix; //Prefix to use to destinct commands
+    commandArr.forEach(setCommandString); //Now with the command prefix, make the string
+
+    useJsBlocks = blocks.useLinkJs;
+    
+    
+    writeLog("Execute Onload", 1);
+    if (useJsBlocks === true) {
+        writeLog("Using JS Setup", 1);
+        setupBlocks();
+    }
+    styleJq();
+    fixJitter();
+    window.HelpVisibility = false;
+    window.popupDiv = $(".popup");
+    
+    
+    // search
+    var searchinput = $(".searchinput");
+
+
+    if (searchinput.length) {
+        searchinput.addEventListener("keypress", function (a) {
+            var key = a.keyCode;
+            if (key == 13) {
+                var query = this.value;
+                search(query);
+            }
+        });
+    }
+
+    
+    // jump to search when tab is pressed
+    document.addEventListener("keypress", function (a) {
+        var key = a.keyCode;
+        if (key == 9) {
+            var search_sqr = $(".search_sqr");
+            search_sqr.style.height = 300 + 37 + "px";
+            search_sqr.style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+            search_sqr.style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
+            $(".searchinput").focus();
+        }
+
+        if (9 == key) {
+            a.preventDefault();
+        }
+    });
+
+    // close popup when clicked
+    window.popupDiv.click( function () {
+        popup(this, "", window.HelpVisibility);
+        window.HelpVisibility = !window.HelpVisibility;
+    });
+
+    // adding event listeners to squares or expanding them onload
+    var sqr = document.querySelectorAll(".sqr");
+    if (!cfg_bool.alwaysopen) {
+        for (var i = 0; i < sqr.length; ++i) {
+            sqr[i].addEventListener("mouseover", expand, false);
+            sqr[i].addEventListener("mouseout", contract, false);
+        }
+    } else {
+        for (var j = 0; j < sqr.length; ++j) {
+            var a = 0;
+            for (var x = 0; x < sqr.length; ++x) {
+                if (a < sqr[x].getElementsByTagName("a").length) {
+                    a = sqr[x].getElementsByTagName("a").length;
+                }
+            }
+            sqr[j].style.height = 225 + 25 * a + "px";
+            if (cfg_bool.borders) {
+                sqr[j].style.borderTop = cfg.border_width + " solid " + cfg.border_colour;
+                sqr[j].style.borderBottom = cfg.border_width + " solid " + cfg.border_colour;
+            }
+        }
+    }
+});

@@ -5,6 +5,41 @@
     
     <head>
         <script src="js/jquery.min.js"></script>
+        <script type="text/javascript">
+function loadData(data) {
+
+//Find regex for tab
+//srs
+
+    cfg = {
+        heading_font:       data.style.heading_font,
+        link_font:          data.style.link_font,
+        heading_font_size:  data.style.heading_font_size,
+        link_font_size:     data.style.link_font_size,
+        background:         data.style.background,
+        foreground:         data.style.foreground,
+        heading_colour:     data.style.heading_color,
+        link_colour:        data.style.link_color,
+        border_colour:      data.style.border_color,
+        border_width:       data.style.border_width,
+        search_colour:      data.style.search_color,
+        search_bg_colour:   data.style.search_bg_color,
+        ref:                data.ext.ref,
+        bottom:             data.ext.bottom,
+        right:              data.ext.right,
+        height:             data.ext.height,
+        width:              data.ext.width,
+        opacity:            data.ext.opacity,
+        search_font:        data.style.search_font
+    };
+
+    cfg_bool = data.bool;
+
+    scratch = data.scratch;
+    blocks = data.scrBlocks;
+}
+        </script>
+        <script src="config.js"></script>
         <script src="js/commands.js"></script>
         <script src="js/links.js"></script>
         <script src="js/main.js"></script>
