@@ -325,11 +325,11 @@ $(document).ready(function() {
     
     
     // search
-    var searchinput = $(".searchinput");
+    var searchinput = $("#searchinput");
 
 
     if (searchinput.length) {
-        searchinput.addEventListener("keypress", function (a) {
+        searchinput.keypress(function (a) {
             var key = a.keyCode;
             if (key == 13) {
                 var query = this.value;
