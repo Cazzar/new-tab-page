@@ -1,59 +1,21 @@
 <!doctype html>
-<link rel="shortcut icon" type="image/x-icon" href="resources/icon_cchara.png" />
+<link rel="shortcut icon" type="image/x-icon" href="assets/icon_cchara.png"/>
 <meta charset="utf8">
 <html>
-    
-    <head>
-        <script src="js/jquery.min.js"></script>
-        <script type="text/javascript">
-function loadData(data) {
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+<div id="bg-img"></div>
+<div id="container">
+    <div id="cell">
+    </div>
+</div>
+<div id="popup"></div>
+</body>
+<script src="js/jquery.js"></script> <!--THIS HAS TO BE FIRST-->
 
-//Find regex for tab
-//srs
-
-    cfg = {
-        heading_font:       data.style.heading_font,
-        link_font:          data.style.link_font,
-        heading_font_size:  data.style.heading_font_size,
-        link_font_size:     data.style.link_font_size,
-        background:         data.style.background,
-        foreground:         data.style.foreground,
-        heading_colour:     data.style.heading_color,
-        link_colour:        data.style.link_color,
-        border_colour:      data.style.border_color,
-        border_width:       data.style.border_width,
-        search_colour:      data.style.search_color,
-        search_bg_colour:   data.style.search_bg_color,
-        ref:                data.ext.ref,
-        bottom:             data.ext.bottom,
-        right:              data.ext.right,
-        height:             data.ext.height,
-        width:              data.ext.width,
-        opacity:            data.ext.opacity,
-        search_font:        data.style.search_font
-    };
-
-    cfg_bool = data.bool;
-
-    scratch = data.scratch;
-    blocks = data.scrBlocks;
-}
-        </script>
-        <script src="config.js"></script>
-        <script src="js/commands.js"></script>
-        <script src="js/links.js"></script>
-        <script src="js/main.js"></script>
-        <link rel="stylesheet" type="text/css" href="resources/style.css">
-    </head>
-    
-    <body>
-        <div id="bgimg"></div>
-        <div id="container">
-            <div id="cell">
-                
-            </div>
-        </div>
-        <div id="popup"></div>
-    </body>
-
+<script src="js/blocks.js"></script>
+<script src="js/main.js"></script> <!--THIS HAS TO BE AFTER blocks.js-->
+<script src="js/search.js"></script>
 </html>
