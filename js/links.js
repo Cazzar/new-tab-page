@@ -24,7 +24,7 @@ blockArr.push({
 });
 
 blockArr.push({
-	title:			"chinese cartoons",
+	title:			"anime",
 	type:			"link",
 	num:			"3"
 });
