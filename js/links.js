@@ -1,9 +1,9 @@
-var blockArr =	[];
-var linksArr =	[];
+window.blocks = [];
+window.links  = [];
 
 /* TEMPLATE
 
-blockArr.push({
+blocks.push({
 	title:			"",
 	type:			"link", //link, search
 	num:			"1"
@@ -11,56 +11,56 @@ blockArr.push({
 */
 
 
-blockArr.push({
+blocks.push({
 	title:			"content",
 	type:			"link",
 	num:			"1"
 });
 
-blockArr.push({
+blocks.push({
 	title:			"images",
 	type:			"link",
 	num:			"2"
 });
 
-blockArr.push({
-	title:			"anime",
+blocks.push({
+	title:			"chinese cartoons",
 	type:			"link",
 	num:			"3"
 });
 
-blockArr.push({
+blocks.push({
 	title:			"search",
 	type:			"search",
 	num:			"4"
 });
 
 //Block 1
-linksArr.push({
+links.push({
 	name:			"/a/",
 	href:			"http://boards.4chan.org/a/",
 	block:			1
 });
 
-linksArr.push({
+links.push({
 	name:			"/jp/",
 	href:			"http://boards.4chan.org/jp/",
 	block:			1
 });
 
-linksArr.push({
+links.push({
 	name:			"/w/",
 	href:			"http://boards.4chan.org/w/",
 	block:			1
 });
 
-linksArr.push({
+links.push({
 	name:			"/g/",
 	href:			"http://boards.4chan.org/g/",
 	block:			1
 });
 
-linksArr.push({
+links.push({
 	name:			"/vg/",
 	href:			"http://boards.4chan.org/vg/",
 	block:			1
@@ -68,38 +68,38 @@ linksArr.push({
 
 //Block 2
 
-linksArr.push({
+links.push({
 	name:			"danbooru",
 	href:			"http://www.donmai.us/",
 	block:			2
 });
 
-linksArr.push({
+links.push({
 	name:			"konachan",
 	href:			"http://www.konachan.com/",
 	block:			2
 });
 
 
-linksArr.push({
+links.push({
 	name:			"yande.re",
 	href:			"http://yande.re/",
 	block:			2
 });
 
-linksArr.push({
+links.push({
 	name:			"vectorbooru",
 	href:			"http://vector.booru.org/",
 	block:			2
 });
 
-linksArr.push({
+links.push({
 	name:			"zerochan",
 	href:			"http://zerochan.net/",
 	block:			2
 });
 
-linksArr.push({
+links.push({
 	name:			"pixiv",
 	href:			"http://www.pixiv.net/",
 	block:			2
@@ -107,37 +107,37 @@ linksArr.push({
 
 
 //Block 3
-linksArr.push({
+links.push({
 	name:			"horriblesubs",
 	href:			"http://horriblesubs.info/",
 	block:			3
 });
 
-linksArr.push({
+links.push({
 	name:			"myanimelist",
 	href:			"http://myanimelist.net/",
 	block:			3
 });
 
-linksArr.push({
+links.push({
 	name:			"anichart",
 	href:			"http://anichart.net/",
 	block:			3
 });
 
-linksArr.push({
+links.push({
 	name:			"anidb",
 	href:			"http://anidb.net/",
 	block:			3
 });
 
-linksArr.push({
+links.push({
 	name:			"nyaa.se",
 	href:			"http://nyaa.se/",
 	block:			3
 });
 
-linksArr.push({
+links.push({
 	name:			"bakabt",
 	href:			"http://bakabt.me/",
 	block:			3
@@ -145,7 +145,7 @@ linksArr.push({
 
 /* Template
 
-linksArr.push({
+links.push({
 	name:			"",
 	href:			""
 	lang:			"",
