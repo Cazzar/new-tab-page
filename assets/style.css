@@ -1,0 +1,117 @@
+@font-face {
+    font-family: tewi;
+    src: url(MonteCarloFixed12.ttf);
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+    background-color: #000000;
+}
+
+a {
+    text-decoration: none;
+    line-height: 25px;
+}
+
+#bg-img {
+    z-index: -10;
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#container {
+    height: 100vh;
+    width: 100vw;
+    display: table;
+}
+
+#cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.sqr {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 3px 3px;
+    overflow: hidden;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+    vertical-align: middle;
+    border-top: 0 solid #45B183;
+    border-bottom: 0 solid #45B183;
+    text-transform: uppercase;
+    background-color: #121212;
+}
+
+.content {
+    margin: 0 10px 0;
+    line-height: 25px;
+}
+
+a:visited, a:link {
+    font: 16px tewi;
+    color: #999999;
+}
+
+.heading {
+    font: 16px tewi;
+    color: #3D8B98;
+
+    width: inherit;
+    height: inherit;
+    line-height: 150px !important;
+    text-transform: uppercase;
+}
+
+#search-input {
+    width: 130px;
+    height: 37px;
+    margin-left: -10px;
+    padding: 0 10px;
+    border: none;
+}
+
+#popup {
+    position: absolute;
+    z-index: 100;
+    bottom: -200px;
+    right: 15px;
+    padding: 25px;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+    text-align: left;
+}
+
+video#bgvid {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background-size: cover;
+}
+
+#search-input {
+    font: 16px tewi;
+    background-color: #2A2A2A;
+    color: #CACACA
+}
+
+#popup {
+    font: 16px tewi;
+    color: #999999;
+    background-color: #121212;
+    border-top: 2px solid #45B183;
+}
